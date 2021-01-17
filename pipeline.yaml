@@ -64,7 +64,7 @@ Resources:
             Version: 1
             Provider: GitHub
           OutputArtifacts:
-          - Name: SourceCode
+          - Name: SourceCodeOutputArtifact
           Configuration:
             Owner: !Ref GitHubOwner
             Repo: !Ref GitHubRepo
@@ -82,13 +82,13 @@ Resources:
             Provider: CloudFormation
             Version: '1'
           InputArtifacts:
-            - Name: SourceCode
+            - Name: SourceCodeOutputArtifact
           Configuration:
             ActionMode: CREATE_UPDATE
             Capabilities: CAPABILITY_IAM
             RoleArn: !GetAtt CloudformationRole.Arn
             StackName: !Ref ApplicationStackName
-            TemplatePath: !Sub "SourceCode::application.yaml"
+            TemplatePath: !Sub "SourceCodeOutputArtifact::application.yaml"
           RunOrder: 1
 
   # 'GithubWebhook' satisfies two requirements:
